@@ -34,16 +34,18 @@
       <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">Send Your Message. ✔ to : {{name}}</h1>
       <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Send your Friend ,the Message you want From Deep Inside Your 💖.<br> AnyThing !</p>
     </div>
+    <form action="/user/{{uniq}}" method="POST">
     <div class="lg:w-1/2 md:w-2/3 mx-auto">
       <div class="flex flex-wrap -m-2">
         <div class="p-2 w-full">
-          <textarea class="w-full bg-gray-800 rounded border border-gray-700 text-white focus:outline-none h-48 focus:border-green-500 text-base px-4 py-2 resize-none block" placeholder="Put Down the Message and Be Anonyomous.👌" required></textarea>
+          <textarea class="w-full bg-gray-800 rounded border border-gray-700 text-white focus:outline-none h-48 focus:border-green-500 text-base px-4 py-2 resize-none block" placeholder="Put Down the Message and Be Anonyomous.👌" name="m" required></textarea>
         </div>
         <div class="p-2 w-full">
-          <button class="flex mx-auto text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">Send. ✈️</button>
+          <button class="flex mx-auto text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg" type="submit">Send. ✈️</button>
         </div>
       </div>
     </div>
+    </form>
   </div>
 </section>
 
