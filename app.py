@@ -30,7 +30,7 @@ def index():
         conn.commit()
         c.close()
         session['uid']=unique
-        return render_template("index.html")
+        return redirect(url_for("index"))
 
 @app.route('/user', methods=['GET', 'POST'])
 def user():
@@ -50,7 +50,7 @@ def user():
         print(ms)
         return render_template("user.html",link=link,username=username,ms=ms)
     else:
-        return render_template("index.html")
+        return redirect(url_for("index"))
 
 
 
@@ -65,7 +65,7 @@ def send(u):
         c.close()
         print(all)
         if all==None:
-            return render_template("index.html")
+            return redirect(url_for("index"))
         else:
             name=all[1]
             uniq=all[2]
@@ -81,8 +81,7 @@ def send(u):
         all=c.fetchone()
         conn.commit()
         c.close()
-        return render_template("index.html")
-
+        return redirect(url_for("index"))
 
 
 
