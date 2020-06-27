@@ -6,6 +6,7 @@ import time
 
 
 app=Flask(__name__)
+app.permanent_session_lifetime = datetime.timedelta(days=365)
 
 def randomno():
     lettersAndDigits = string.ascii_letters + string.digits
