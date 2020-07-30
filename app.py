@@ -1,4 +1,4 @@
-from flask import Flask,redirect,render_template,url_for,session,request
+from flask import Flask,redirect,render_template,url_for,request,make_response
 import sqlite3
 import string
 import random
@@ -6,7 +6,6 @@ import time
 
 
 app=Flask(__name__)
-app.permanent_session_lifetime = datetime.timedelta(days=365)
 
 def randomno():
     lettersAndDigits = string.ascii_letters + string.digits
@@ -16,7 +15,7 @@ def randomno():
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method=="GET":
-        if "uid" in session:
+        if "uid" in request.cookies:
             return redirect(url_for('user'))
         else:
             return render_template("index.html")
@@ -30,13 +29,14 @@ def index():
         all=c.fetchone()
         conn.commit()
         c.close()
-        session['uid']=unique
-        return redirect(url_for("index"))
+        resp = make_response(redirect(url_for("index"))) 
+        resp.set_cookie("uid",unique)
+        return resp
 
 @app.route('/user', methods=['GET', 'POST'])
 def user():
-    if "uid" in session:
-        userkey=session['uid']
+    if "uid" in request.cookies:
+        userkey=request.cookies.get("uid")  
         conn=sqlite3.connect('database.db')
         c=conn.cursor()
         s='SELECT * from users WHERE uniquelink="'+str(userkey)+'"'
@@ -89,4 +89,4 @@ def send(u):
 
 if __name__ == "__main__":
     app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
-    app.run(debug=False,port=1447)
+    app.run(debug=False)
