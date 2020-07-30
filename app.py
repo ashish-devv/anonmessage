@@ -30,7 +30,7 @@ def index():
         conn.commit()
         c.close()
         resp = make_response(redirect(url_for("index"))) 
-        resp.set_cookie("uid",unique)
+        resp.set_cookie("uid",unique,max_age=60*60*24*365*2)
         return resp
 
 @app.route('/user', methods=['GET', 'POST'])
